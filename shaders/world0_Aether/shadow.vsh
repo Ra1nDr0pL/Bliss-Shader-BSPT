@@ -94,14 +94,14 @@ bool intersectCone(float coneHalfAngle, vec3 coneTip , vec3 coneAxis, vec3 rayOr
 	if (prod <= -coneHalfAngle) return true;   //In view frustrum
 
 	float a = dot(rayDir,coneAxis)*dot(rayDir,coneAxis) - coneHalfAngle*coneHalfAngle;
-	float b = 2. * (dot(rayDir,coneAxis)*dot(co,coneAxis) - dot(rayDir,co)*coneHalfAngle*coneHalfAngle);
+	float b = 2.0 * (dot(rayDir,coneAxis)*dot(co,coneAxis) - dot(rayDir,co)*coneHalfAngle*coneHalfAngle);
 	float c = dot(co,coneAxis)*dot(co,coneAxis) - dot(co,co)*coneHalfAngle*coneHalfAngle;
 
-	float det = b*b - 4.*a*c;
-	if (det < 0.) return false;    // No intersection with either forward cone and backward cone
+	float det = b*b - 4.0*a*c;
+	if (det < 0.0) return false;    // No intersection with either forward cone and backward cone
 
 	det = sqrt(det);
-	float t2 = (-b + det) / (2. * a);
+	float t2 = (-b + det) / (2.0 * a);
 	if (t2 <= 0.0 || t2 >= maxZ) return false;  //Idk why it works
 
 	return true;

@@ -94,7 +94,7 @@ void SwirlAroundOrigin(inout vec3 alteredOrigin, vec3 origin){
 	mat2 rotationMatrix  = mat2(vec2(cos(radiance),  -sin(radiance)),  vec2(sin(radiance),  cos(radiance)));
 
 	// make the swirl only happen within a radius
-	float SwirlBounds = clamp(sqrt(length(vec3(origin.x, origin.y-100,origin.z)) / 200.0 - 1.0), 0.0, 1.0);
+	float SwirlBounds = clamp(sqrt(length(vec3(origin.x, origin.y-100.0,origin.z)) / 200.0 - 1.0), 0.0, 1.0);
 
 	alteredOrigin.xz = mix(alteredOrigin.xz * rotationMatrix, alteredOrigin.xz, SwirlBounds);
 }
@@ -124,18 +124,18 @@ float fogShape(in vec3 pos){
 
 	float vortexBounds = clamp(vortexBoundRange - length(pos), 0.0,1.0);
 	vec3 samplePos = pos*vec3(1.0,1.0/48.0,1.0);
-	float fogYstart = -60;
+	float fogYstart = -60.0;
 
 	// this is below down where you fall to your death.
-	float voidZone = max(exp2(-1.0 * sqrt(max(pos.y - -60,0.0))) ,0.0) ;
+	float voidZone = max(exp2(-1.0 * sqrt(max(pos.y - -60.0,0.0))) ,0.0) ;
 
 	// swirly swirly :DDDDDDDDDDD
 	SwirlAroundOrigin(samplePos, pos);
 
 	float noise = densityAtPosFog(samplePos * 12.0);
-	float erosion = 1.0-densityAtPosFog((samplePos - frameTimeCounter/20) * (124 + (1-noise)*7));
+	float erosion = 1.0-densityAtPosFog((samplePos - frameTimeCounter/20.0) * (124.0 + (1-noise)*7.0));
 
-	float clumpyFog = max(exp(noise * -mix(10,4,vortexBounds))*mix(2,1,vortexBounds) - erosion*0.3, 0.0);
+	float clumpyFog = max(exp(noise * -mix(10.0,4.0,vortexBounds))*mix(2.0,1.0,vortexBounds) - erosion*0.3, 0.0);
     
 	// apply limts
 	VolumeBounds(clumpyFog, pos);

@@ -236,9 +236,9 @@ vec2 SSRT_Shadows(vec3 viewPos, bool depthCheck, vec3 lightDir, float noise, boo
 
 	vec3 clipPosition = toClipSpace3_DH(viewPos, depthCheck);
 	//prevents the ray from going behind the camera
-	float rayLength = ((viewPos.z + lightDir.z * _far*sqrt(3.)) > -_near)
+	float rayLength = ((viewPos.z + lightDir.z * _far*sqrt(3.0)) > -_near)
 					? (-_near -viewPos.z) / lightDir.z
-					: _far*sqrt(3.);
+					: _far*sqrt(3.0);
 
 	vec3 direction = toClipSpace3_DH(viewPos + lightDir*rayLength, depthCheck) - clipPosition;  //convert to clip space
 
@@ -296,9 +296,9 @@ float SSRT_FlashLight_Shadows(vec3 viewPos, bool depthCheck, vec3 lightDir, floa
 
 	vec3 clipPosition = toClipSpace3_DH(viewPos, depthCheck);
 	//prevents the ray from going behind the camera
-	float rayLength = ((viewPos.z + lightDir.z * _far*sqrt(3.)) > -_near)
+	float rayLength = ((viewPos.z + lightDir.z * _far*sqrt(3.0)) > -_near)
 					? (-_near -viewPos.z) / lightDir.z
-					: _far*sqrt(3.);
+					: _far*sqrt(3.0);
 
 	vec3 direction = toClipSpace3_DH(viewPos + lightDir*rayLength, depthCheck) - clipPosition; //convert to clip space
 

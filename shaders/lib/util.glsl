@@ -36,8 +36,8 @@ const float goldenAngle = TAU / PHI / PHI;
 #define lumCoeff vec3(0.2125, 0.7154, 0.0721)
 
 float facos(const float sx) {
-	float x = clamp(abs( sx ),0.,1.);
-	float a = sqrt( 1. - x ) * ( -0.16882 * x + 1.56734 );
+	float x = clamp(abs( sx ),0.0,1.0);
+	float a = sqrt( 1.0 - x ) * ( -0.16882 * x + 1.56734 );
 	return mix(PI - a, a, step(0.0, sx));
 	//float c = clamp(-sx * 1e35, 0., 1.);
 	//return c * pi + a * -(c * 2. - 1.); //no conditional version
@@ -168,8 +168,8 @@ vec2 rsi(vec3 position, vec3 direction, float radius) {
 }
 
 float HaltonSeq3(int index) {
-	float r = 0.;
-	float f = 1.;
+	float r = 0.0;
+	float f = 1.0;
 	for (int i = index; i > 0; i /= 3){
 		f /= 3.0;
 		r += f * float(i % 3);
@@ -178,8 +178,8 @@ float HaltonSeq3(int index) {
 }
 
 float HaltonSeq2(int index) {
-	float r = 0.;
-	float f = 1.;
+	float r = 0.0;
+	float f = 1.0;
 	for (int i = index; i > 0; i /= 2){
 		f *= 0.5;
 		r += f * float(i % 2);
